@@ -6,7 +6,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-public class ExecutionTest {
+public class ParallelExecutionTest {
     public static void sleep(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
