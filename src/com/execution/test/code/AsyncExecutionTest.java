@@ -25,7 +25,8 @@ public class AsyncExecutionTest {
         System.out.println(val+" -- "+Thread.currentThread());
     }
     public static void main(String[] args) throws Exception {
-        /*CompletableFuture<Integer> future = create();
+        /*
+        CompletableFuture<Integer> future = create();
 
         //some famous functional interfaces in Java 8
         //Supplier -> get value - T get()
@@ -44,12 +45,24 @@ public class AsyncExecutionTest {
         System.out.println(future2.getNow(-1));
         System.out.println("got it...");*/
 
-        System.out.println("In main -- "+Thread.currentThread());
-        CompletableFuture<Integer> future3 = create();
-        sleep(100);
-        future3.thenAccept((val) -> printIt(val));
-        System.out.println("here...");
-        sleep(1000); //main thread is put to sleep as the FJP thread executes the printIn method.
+//        System.out.println("In main -- "+Thread.currentThread());
+//        CompletableFuture<Integer> future3 = create();
+//        sleep(100);
+//        future3.thenAccept((val) -> printIt(val));
+//        System.out.println("here...");
+//        sleep(1000); //main thread is put to sleep as the FJP thread executes the printIn method.
+
+        CompletableFuture<Integer> future =
+                new CompletableFuture<>();
+        future.thenApply(data -> data * 2)
+                .thenApply(data -> data + 1)
+                .thenAccept(data -> System.out.println(data));;
+        System.out.println("build the pipeline");
+
+        System.out.println("prepared the pipeline");
+        sleep(1000);
+        future.complete(2);
+        sleep(1000);
     }
 
 }
