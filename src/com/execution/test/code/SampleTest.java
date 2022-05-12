@@ -1,7 +1,5 @@
 package com.execution.test.code;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -50,12 +48,18 @@ public class SampleTest {
         CompletableFuture<String> f2 = op2();
         CompletableFuture<String> f3 = op3();
 
+//        CompletableFuture<Void> combinedCompletableFuture = CompletableFuture.allOf(f1,f2,f3);
         String combined = Stream.of(f1,f2,f3).map(CompletableFuture::join)
                 .collect(Collectors.joining(" "));
 
+//        try {
+//            System.out.println(combinedCompletableFuture.get());
+//        } catch (Exception e) {}
+        System.out.println(combined);
+        System.out.println(f1.isDone()+", "+f2.isDone()+", "+f3.isDone());
         long end = System.currentTimeMillis();
         System.out.println("execution time: "+(end-start));
-        System.out.println(combined);
+
 
     }
     public static int compute() {
