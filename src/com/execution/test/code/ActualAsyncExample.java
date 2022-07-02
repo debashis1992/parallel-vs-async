@@ -4,7 +4,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SampleTest {
+public class ActualAsyncExample {
     public static CompletableFuture<String> op1() {
         return CompletableFuture.supplyAsync(() -> {
             System.out.println("op1 -- "+Thread.currentThread());
@@ -31,17 +31,17 @@ public class SampleTest {
 
     public static void main(String[] args) {
 
-        create()
-                .thenApply(data -> data * 2)
-                .thenAccept(data -> System.out.println(data));
+//        create()
+//                .thenApply(data -> data * 2)
+//                .thenAccept(data -> System.out.println(data));
 
-        CompletableFuture<String> future =
-                CompletableFuture.supplyAsync(() -> "hello")
-                        .thenCompose(s -> CompletableFuture.supplyAsync(() -> s + " world")); //does this operation asynchronously
+//        CompletableFuture<String> future =
+//                CompletableFuture.supplyAsync(() -> "hello")
+//                        .thenCompose(s -> CompletableFuture.supplyAsync(() -> s + " world")); //does this operation asynchronously
 
-        CompletableFuture<String> future2 =
-                CompletableFuture.supplyAsync(() -> "hello")
-                        .thenApply(s -> s + " world"); //does this operation synchronously
+//        CompletableFuture<String> future2 =
+//                CompletableFuture.supplyAsync(() -> "hello")
+//                        .thenApply(s -> s + " world"); //does this operation synchronously
 
         long start = System.currentTimeMillis();
         CompletableFuture<String> f1 = op1();
